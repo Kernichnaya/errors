@@ -1,0 +1,83 @@
+============================= test session starts =============================
+collecting ... collected 8 items
+
+test_add_contact.py::test_add_contact FAILED                             [ 12%]
+test_add_contact.py:3 (test_add_contact)
+1 != 0
+
+Expected :0
+Actual   :1
+<Click to see difference>
+
+app = <fixture.application.Application object at 0x000001AFDFEBB2E0>
+
+    def test_add_contact(app):
+        old_contacts = app.contact.get_contact_list()
+        contact = Contact(firstname="lv", middlename="kr", lastname="lv2", nickname="kr2", title="Title",
+                                      company="Company2", address="elizarovix", homephone="97-52-5", mobile="+79293713057",
+                                      workphone="89893585085", faxphone="89811115085", email="klobastov@gmal.com",
+                                      email2="Ker@gmal.com",
+                                      email3="rtg@gmal.com", homepage="dfgdfg", bday="14", bmonth="September",
+                                      byear="2000", aday="15", amonth="November", ayear="1997", address2="Adress",
+                                      phone2="852451285", notes="23")
+        app.contact.createcon(contact)
+        new_contacts = app.contact.get_contact_list()
+>       assert len(old_contacts) + 1 == len(new_contacts)
+E       assert 1 == 0
+
+test_add_contact.py:15: AssertionError
+
+test_add_group.py::test_add_group 
+
+PASSED                                 [ 25%]
+test_add_group.py::test_empty_add_group PASSED                           [ 37%]
+test_del_contact.py::test_delete_first_contact FAILED                    [ 50%]
+test_del_contact.py:3 (test_delete_first_contact)
+app = <fixture.application.Application object at 0x000001AFDFEBB2E0>
+
+    def test_delete_first_contact(app):
+        if app.contact.countcon() == 0:
+            app.contact.createcon(Contact(firstname="test"))
+        old_contacts = app.contact.get_contact_list
+        app.contact.delete_first_contact()
+        new_contacts = app.contact.get_contact_list()
+>       assert len(old_contacts) - 1 == len(new_contacts)
+E       TypeError: object of type 'method' has no len()
+
+test_del_contact.py:10: TypeError
+
+test_del_group.py::test_delete_first_group 
+
+PASSED                        [ 62%]
+test_modify_contact.py::test_modify_contact_name FAILED                  [ 75%]
+test_modify_contact.py:3 (test_modify_contact_name)
+app = <fixture.application.Application object at 0x000001AFDFEBB2E0>
+
+    def test_modify_contact_name(app):
+        if app.contact.countcon() == 0:
+            app.contact.createcon(Contact(firstname="test"))
+        old_contacts = app.contact.get_contact_list()
+        contact = Contact(firstname="Иванов", middlename="Иван", lastname="Иванович", nickname="ИИИ", title="Title 2",
+                    company="Company", address="Ленина", homephone="8-800-55", mobile="+88005553535",
+                    workphone="89893577777", faxphone="89811115085", email="ivanov@gmal.com",
+                    email2="ivanov2@gmal.com",
+                    email3="ivanov3@gmal.com", homepage="qwerty", bday="15", bmonth="September",
+                    byear="2001", aday="16", amonth="November", ayear="1998", address2="Adress2",
+                    phone2="852451285", notes="24")
+        app.contact.modify_first_contact(contact)
+        new_contacts = app.contact.get_contact_list()
+        assert len(old_contacts) == len(new_contacts)
+>       old_contacts[0] = contact
+E       IndexError: list assignment index out of range
+
+test_modify_contact.py:18: IndexError
+
+test_modify_group.py::test_modify_group_name 
+
+PASSED                      [ 87%]
+test_modify_group.py::test_modify_group_header PASSED                    [100%]
+
+============== 3 failed, 5 passed, 1 warning in 61.52s (0:01:01) ==============
+
+Process finished with exit code 1
+
